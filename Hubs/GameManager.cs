@@ -56,22 +56,24 @@ public class GameManager
         }
     }
 
-    public string? CheckWinner(string[] board)
+    private static readonly int[][] WinLines =
     {
-        int[][] lines =
-        {
-            new[] { 0, 1, 2 }, new[] { 3, 4, 5 }, new[] { 6, 7, 8 },
-            new[] { 0, 3, 6 }, new[] { 1, 4, 7 }, new[] { 2, 5, 8 },
-            new[] { 0, 4, 8 }, new[] { 2, 4, 6 }
-        };
+        new[] { 0, 1, 2 }, new[] { 3, 4, 5 }, new[] { 6, 7, 8 },
+        new[] { 0, 3, 6 }, new[] { 1, 4, 7 }, new[] { 2, 5, 8 },
+        new[] { 0, 4, 8 }, new[] { 2, 4, 6 }
+    };
 
-        foreach (var line in lines)
+    // Returns the winning symbol (or "draw") plus the three cell indices that won,
+    // so the client can draw a line through them. Line is null for a draw or no result yet.
+    public (string? Result, int[]? Line) CheckWinner(string[] board)
+    {
+        foreach (var line in WinLines)
         {
             var (a, b, c) = (line[0], line[1], line[2]);
             if (!string.IsNullOrEmpty(board[a]) && board[a] == board[b] && board[b] == board[c])
-                return board[a];
+                return (board[a], line);
         }
 
-        return board.All(cell => !string.IsNullOrEmpty(cell)) ? "draw" : null;
+        return board.All(cell => !string.IsNullOrEmpty(cell)) ? ("draw", null) : (null, null);
     }
 }

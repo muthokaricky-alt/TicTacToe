@@ -42,7 +42,7 @@ public class GameHub : Hub
 
         session.Board[cellIndex] = symbol;
 
-        var winner = _gameManager.CheckWinner(session.Board);
+        var (winner, winningLine) = _gameManager.CheckWinner(session.Board);
         session.CurrentTurn = session.CurrentTurn == "X" ? "O" : "X";
 
         await Clients.Client(session.PlayerXConnectionId).SendAsync("MoveMade", cellIndex, symbol, session.CurrentTurn);
@@ -51,8 +51,8 @@ public class GameHub : Hub
         if (winner is not null)
         {
             session.IsOver = true;
-            await Clients.Client(session.PlayerXConnectionId).SendAsync("GameOver", winner);
-            await Clients.Client(session.PlayerOConnectionId).SendAsync("GameOver", winner);
+            await Clients.Client(session.PlayerXConnectionId).SendAsync("GameOver", winner, winningLine);
+            await Clients.Client(session.PlayerOConnectionId).SendAsync("GameOver", winner, winningLine);
         }
     }
 

@@ -3,27 +3,64 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multiplayer Tic-Tac-Toe</title>
+    <title>Tic-Tac-Toe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Tic-Tac-Toe</h1>
-        <p id="status">Connecting...</p>
-        <div id="board" class="board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
-        <p id="symbol-label"></p>
+    <div class="page">
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-mark"><i data-lucide="grid-3x3"></i></div>
+                <div>
+                    <h1>Tic-Tac-Toe</h1>
+                    <span class="subtitle">Real-time 1v1</span>
+                </div>
+            </div>
+            <div id="symbol-badge" class="badge badge-ghost hidden">
+                <i data-lucide="user"></i>
+                <span id="symbol-label"></span>
+            </div>
+        </header>
+
+        <main class="card board-card">
+            <div id="status-pill" class="status-pill skeleton">
+                <span class="status-dot"></span>
+                <span id="status-text">Connecting</span>
+            </div>
+
+            <div class="board-wrapper">
+                <div id="board" class="board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+                <div id="win-line" class="win-line"></div>
+            </div>
+        </main>
+
+        <p class="footnote">Open this page in a second window to play against yourself, or send the link to a friend.</p>
     </div>
 
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div id="modal-icon" class="modal-icon"></div>
+            <h2 id="modal-title" class="modal-title"></h2>
+            <p id="modal-message" class="modal-message"></p>
+            <button id="modal-button" class="btn btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
     <script src="js/game.js"></script>
 </body>

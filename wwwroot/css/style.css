@@ -299,8 +299,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(6, 7, 10, 0.6);
-    backdrop-filter: blur(10px);
+    background: rgba(6, 7, 10, 0.32);
+    backdrop-filter: blur(4px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s var(--ease);
